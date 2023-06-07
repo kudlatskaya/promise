@@ -5,15 +5,60 @@
     <title>Title</title>
 </head>
 <body>
-
+<script src="axios.js"></script>
+<script src="api.js"></script>
 <script>
-    let myPromise = new Promise(() => {
-        alert('Hello');
-    });
+    // let myPromise1 = new Promise((resolve) => {
+    //     setTimeout(() => {
+    //         alert('Hello');
+    //     }, 2000)
+    //
+    //     resolve();
+    // });
+    //
+    // myPromise1.then(( ) => {
+    //     console.log("myPromise зарезолвился, и я узнал об этом");
+    // })
+    // api.sendStudentsCountToItKamasutra(20)
+    //     .then(res => {
+    //         console.log(res);
+    //     });
+    //
+    // api.getVacanciesCountFromMicrosoft()
+    //     .then(res => {
+    //         console.log(res);
+    //     });
+    //
+    // api.getVacanciesCountFromGoogle()
+    //     .then(res => {
+    //         console.log(res);
+    //     });
 
-    myPromise.then(( ) => {
-        console.log("myPromise зарезолвился, и я узнал об этом");
-    })
+    let prM = api.getVacanciesCountFromMicrosoft()
+        .then(data => {
+            console.log(data);
+        });
+
+   let prG = api.getVacanciesCountFromGoogle()
+        .then(data => {
+            console.log(data);
+        });
+
+    let promises = [prM,prG];
+    let commonPromise = Promise.all(promises);
+    console.log(`ku ${JSON.stringify(commonPromise)}`)
+    let count = commonPromise[0] + commonPromise[1];
+    console.log(`ku ${count}`)
+
+
+    api.sendStudentsCountToItKamasutra(JSON.stringify())
+        .then(data => {
+            console.log(data);
+        });
+
+
 </script>
+<!--<script src="myPromise.js"/>-->
+
 </body>
 </html>
