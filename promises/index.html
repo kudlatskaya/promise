@@ -34,27 +34,45 @@
     //         console.log(res);
     //     });
 
-    let prM = api.getVacanciesCountFromMicrosoft()
-        .then(data => {
-            console.log(data);
-        });
+   //  let prM = api.getVacanciesCountFromMicrosoft()
+   //
+   //
+   // let prG = api.getVacanciesCountFromGoogle()
+   //
+   //
+   //  let promises = [prM,prG];
+   //  let commonPromise = Promise.all(promises);
+    // console.log(`ku ${commonPromise}`)
+    // let count = commonPromise[0] + commonPromise[1];
+    // console.log(`ku ${count}`)
 
-   let prG = api.getVacanciesCountFromGoogle()
-        .then(data => {
-            console.log(data);
-        });
+    // commonPromise
+    //     .then((res) => {
+    //         api.sendStudentsCountToItKamasutra(res[0] + res[1])
+    //             .then(d => {
+    //                 console.log(d);
+    //             });
+    //     })
 
-    let promises = [prM,prG];
-    let commonPromise = Promise.all(promises);
-    console.log(`ku ${JSON.stringify(commonPromise)}`)
-    let count = commonPromise[0] + commonPromise[1];
-    console.log(`ku ${count}`)
+    async function load() {
+        let prM = await api.getVacanciesCountFromMicrosoft()
+        let prG = await api.getVacanciesCountFromGoogle()
+        let res = await api.sendStudentsCountToItKamasutra(prM +prG)
+
+        console.log(res)
+    }
+
+    load()
 
 
-    api.sendStudentsCountToItKamasutra(JSON.stringify())
-        .then(data => {
-            console.log(data);
-        });
+
+
+
+
+    // api.sendStudentsCountToItKamasutra(JSON.stringify())
+    //     .then(data => {
+    //         console.log(data);
+    //     });
 
 
 </script>
